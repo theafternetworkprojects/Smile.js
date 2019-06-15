@@ -1,0 +1,1 @@
+loadModule("core-main.js")
