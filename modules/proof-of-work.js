@@ -2,8 +2,8 @@ var { md5 } = loadModule("module.js")
 var sha = loadModule("sha.js")
 module.exports.solve = function solve(data,difficulty) {
   var nonce = 0n;
-  var hash = "";
-  var date = "";
+  var hash = " ";
+  var date = " ";
   while (hash.substring(0, difficulty) !== Array(difficulty + 1).join("0")){
     nonce++
     date = Number(new Date())
