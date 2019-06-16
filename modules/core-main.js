@@ -1,7 +1,7 @@
-window.smileyjs = ""
+window.smileyjs = {}
 smileyjs.blockchain = loadModule("blockchain.js")
 document.head.innerHTML += "<link href='stylesheet href='https://smileycreations15.com/files/css/external.min.css'>"
-smileyjs.ui = ""
+smileyjs.ui = {}
 smileyjs.ui.notify = function notify(location = "top-left", type = "plain", dialogContent, black = true) {
 			let dialog = document.createElement("div")
 			dialog.className = "notify " + location + " do-show font-notify"
