@@ -33,8 +33,8 @@ smileyjs.genToken = function(secret, validity){
 	var hashOut = 0;
 	for (var i = 0;i !== hashes.length;i++){
 		hashOut += Number("0x" + hashes[i]);
-	};
+	}
 	var a = String(hashOut * Math.floor(new Date().getTime() / validity)).split("");
 	a.splice(0,1);
 	return a.join("");
-}
+};
