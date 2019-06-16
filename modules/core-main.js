@@ -131,4 +131,3 @@ smileyjs.randomId = function randomId(length, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXY
       }
     }
 // TODO: INSERT UI CODE HERE
-loadModule("2-factor-auth.js")
