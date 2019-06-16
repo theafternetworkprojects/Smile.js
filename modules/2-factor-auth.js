@@ -38,4 +38,4 @@ smileyjs.genToken = function(secret, validity,length = 6){
 	var a = String(hashOut * Math.floor(new Date().getTime() / validity)).split("");
 	a.splice(0,1 + ((a.length - 1) - length));
 	return a.join("");
-};
+}
