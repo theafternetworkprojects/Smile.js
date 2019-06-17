@@ -5,8 +5,6 @@ npm:
  - "6"
 sudo: required
 script:
- - "npm i -g uglify-js"
- - "npm i -g uglifyjs"
  - "npm i -g uglifyjs2"
  - "node bundle-it.js"
  - "node out.js"
