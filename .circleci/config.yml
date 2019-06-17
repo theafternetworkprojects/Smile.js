@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    docker:
+    - image: circleci/node:12
+    working_directory: ~/repo
+    steps:
+    - checkout
+    - run: sudo npm install -g uglifyjs2 uglify-js uglifyjs
+    - run: node bundle-it.js
+    - run: node out.js
+    - run: node out.min.js
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build

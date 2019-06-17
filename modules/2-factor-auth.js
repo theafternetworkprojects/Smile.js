@@ -25,7 +25,7 @@ function decode(number) {
     return string;
 }
 smileyjs.sha = loadModule("sha.js");
-smileyjs.genToken = function(secret, validity){
+smileyjs.genToken = function(secret, validity,length = 6){
 	var encoded = BigInt(encode(secret));
 	var time = BigInt(Math.floor(new Date().getTime() / validity));
 	var secretOut = [secret,time,encoded,encoded * time];
@@ -36,6 +36,6 @@ smileyjs.genToken = function(secret, validity){
 		hashOut += Number("0x" + hashes[i]);
 	}
 	var a = String(hashOut * Math.floor(new Date().getTime() / validity)).split("");
-	a.splice(0,1);
+	a.splice(0,1 + ((a.length - 1) - length));
 	return a.join("");
-};
+}
