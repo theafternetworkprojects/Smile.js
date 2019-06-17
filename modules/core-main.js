@@ -1,4 +1,4 @@
-window.smileyjs = {}
+this.smileyjs = {}
 smileyjs.blockchain = loadModule("blockchain.js")
 document.head.innerHTML += "<link href='stylesheet href='https://smileycreations15.com/files/css/external.min.css'>"
 smileyjs.ui = {}
