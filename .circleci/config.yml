@@ -6,7 +6,7 @@ jobs:
     working_directory: ~/repo
     steps:
     - checkout
-    - run: npm install -g uglifyjs2 uglify-js uglifyjs
+    - run: sudo npm install -g uglifyjs2 uglify-js uglifyjs
     - run: node bundle-it.js
     - run: node out.js
     - run: node out.min.js
