@@ -1,7 +1,9 @@
 language: node_js
 node_js:
  - "12"
+sudo: required
 script:
+ - "sudo npm i -g uglifyjs"
  - "node bundle-it.js"
  - "node out.js"
  - "node out.min.js"
