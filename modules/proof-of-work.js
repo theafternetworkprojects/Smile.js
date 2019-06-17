@@ -20,7 +20,7 @@ module.exports.verify = function verify(data,hash) {
   var hash = hashParts[0]
   var nonce = Number(hashParts[1])
   var difficulty = Number(hashParts[2])
-  var nulls = " "
+  var nulls = ""
   for (var i = 0;i !== Math.abs(difficulty);i++) nulls += "0"
   if (sha.sha512(String(difficulty) + String(nonce) + data) === hash && hash.startsWith(nulls)){
     return true
