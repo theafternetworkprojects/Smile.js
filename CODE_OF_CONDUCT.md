@@ -22,6 +22,7 @@ include:
 
 Examples of unacceptable behavior by participants include:
 
+* Breaking a build of Smile.js
 * The use of sexualized language or imagery and unwelcome sexual attention or
  advances
 * Trolling, insulting/derogatory comments, and personal or political attacks
