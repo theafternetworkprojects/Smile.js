@@ -15,4 +15,4 @@ markComment: >
   recent activity. It will be closed in 2 days if no further activity occurs. Thank you
   for your contributions.
 # Comment to post when closing a stale issue. Set to `false` to disable
-closeComment: Now that it has been 2 days after being marked stale, this will be marked as stale. :)
+closeComment: Now that it has been 2 days after being marked stale, this will be closed.
