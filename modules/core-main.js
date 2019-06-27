@@ -4,6 +4,8 @@ if (this.document){
 	document.head.innerHTML += "<link href='stylesheet href='https://smileycreations15.com/files/css/external.min.css'>"
 }
 smileyjs.ui = {}
+smileyjs.paper = loadModule("paper.js")
+
 smileyjs.ui.notify = function notify(location = "top-left", type = "plain", dialogContent, black = true) {
 			let dialog = document.createElement("div")
 			dialog.className = "notify " + location + " do-show font-notify"
