@@ -1,10 +1,12 @@
-this.smileyjs = {}
-smileyjs.blockchain = loadModule("blockchain.js")
+this.smilejs = {}
+smilejs.blockchain = loadModule("blockchain.js")
 if (this.document){
 	document.head.innerHTML += "<link href='stylesheet href='https://smileycreations15.com/files/css/external.min.css'>"
 }
-smileyjs.ui = {}
-smileyjs.ui.notify = function notify(location = "top-left", type = "plain", dialogContent, black = true) {
+smilejs.ui = {}
+smilejs.paper = loadModule("paper.js")
+
+smilejs.ui.notify = function notify(location = "top-left", type = "plain", dialogContent, black = true) {
 			let dialog = document.createElement("div")
 			dialog.className = "notify " + location + " do-show font-notify"
 			dialog.dataset.notificationStatus = type
@@ -27,7 +29,7 @@ smileyjs.ui.notify = function notify(location = "top-left", type = "plain", dial
 
 			document.body.appendChild(dialog)
 		}
-    smileyjs.ui.showLoaderOverlay = function showLoaderOverlay(id, text = null, overlayHtml = false) {
+    smilejs.ui.showLoaderOverlay = function showLoaderOverlay(id, text = null, overlayHtml = false) {
 			if (null !== document.getElementById(id)) throw new Error("The element already exists.");
 			let div = document.createElement("div")
 			let option = "center"
@@ -76,7 +78,7 @@ smileyjs.ui.notify = function notify(location = "top-left", type = "plain", dial
 			proto[Symbol.toStringTag] = "LoaderOverlay"
 			return Object.create(proto)
 		}
-		smileyjs.ui.trapFocus = function trapFocus(elem) {
+		smilejs.ui.trapFocus = function trapFocus(elem) {
 			var focusIndex = 0;
 			const focusable = "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex]:not(*[tabindex='-1']), *[contenteditable]";
 			if (null !== document.querySelector(":focus")) document.querySelector(":focus").blur();
@@ -109,7 +111,7 @@ smileyjs.ui.notify = function notify(location = "top-left", type = "plain", dial
 				}
 			});
 		}
-smileyjs.randomId = function randomId(length, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') {
+smilejs.randomId = function randomId(length, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') {
 			var result = '';
 			var characters = chars;
 			var charactersLength = characters.length;
@@ -118,10 +120,10 @@ smileyjs.randomId = function randomId(length, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXY
 			}
 			return result;
 		}
-    smileyjs.ui.modal = function (html) {
+    smilejs.ui.modal = function (html) {
       var div = document.createElement("div")
       div.className = "grey-overlay"
-      var id = smileyjs.randomId(30)
+      var id = smilejs.randomId(30)
       div.innerHTML = '<div class="modal" id="' + id + '-modal">' + html + '</div>'
       div.id = id
       document.body.appendChild(div)

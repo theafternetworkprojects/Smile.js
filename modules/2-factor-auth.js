@@ -24,12 +24,12 @@ function decode(number) {
     }
     return string;
 }
-smileyjs.sha = loadModule("sha.js");
-smileyjs.genToken = function(secret, validity,length = 6){
+smilejs.sha = loadModule("sha.js");
+smilejs.genToken = function(secret, validity,length = 6){
 	var encoded = BigInt(encode(secret));
 	var time = BigInt(Math.floor(new Date().getTime() / validity));
 	var secretOut = [secret,time,encoded,encoded * time];
-	var hashedSecret = smileyjs.sha.sha512(secretOut.join(""));
+	var hashedSecret = smilejs.sha.sha512(secretOut.join(""));
 	var hashes = hashedSecret.match(/.{2,2}/g);
 	var hashOut = 0;
 	for (var i = 0;i !== hashes.length;i++){
