@@ -8,3 +8,7 @@ script:
  - "node bundle-it.js"
  - "node out.js"
  - "node out.min.js"
+ - istanbul cover ./node_modules/mocha/bin/_mocha --reporter lcovonly -- -R spec
+ - codecov
+install:
+  - npm install -g codecov
