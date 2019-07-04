@@ -8,3 +8,5 @@ script:
  - "node bundle-it.js"
  - "node out.js"
  - "node out.min.js"
+ - "npm i -g codecov"
+ - "codecov"
