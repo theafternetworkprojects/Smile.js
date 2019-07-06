@@ -6,7 +6,7 @@ Radio buttons (`span.radio`):
 <span class="radio ripple"></span>
 
 Buttons (`.button`):
-<button class="ripple transparent-button button">Button ()</button>
+<button class="ripple transparent-button button">Button</button>
 
 Ripples (`.ripple`):
 <div style="display:flex;height:"100px;width:100%;background-color:white;border:2px solid black;" class="ripple"></div>
