@@ -42,7 +42,33 @@ paper-ripple {
     overflow: hidden;
     border-radius: inherit;
     transform: perspective(0px);
-}</style>`
+}
+.ripple {
+  overflow:hidden;
+  position:relative;
+}
+.radio {
+  border-radius:50%;
+  background-color: white;
+  height:10px;
+  width:10px;
+  display: flex;
+  border-radius: 50%;
+  background-color: grey;
+  height: 15px;
+  width: 15px;
+}
+.radio[checked]::after {
+  content: "";
+  height: 5px;
+  width:5px;
+  border-radius:50%;
+  background-color: white;
+  position:relative;
+  left:5px;
+  align-self:center;
+}
+</style>`;	
 // if (document.readyState === "completed"){
 // 	document.body.innerHTML = "<paper>" + document.body.innerHTML + "</paper>"
 // } else {
