@@ -1,4 +1,4 @@
-## Smile.js
+# Smile.js
 A UI library.
 
 ## Examples:
