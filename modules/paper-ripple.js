@@ -28,8 +28,8 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     while (target && target.classList && !target.classList.contains("ripple")) target = target.parentNode;
     if (!target || !target.classList || !target.classList.contains("ripple")) return;
     if (event.targetTouches.length > 1) return;
-    const x = event.targetTouches[0].layerX - target.getBoundingClientRect().left;
-    const y = event.targetTouches[0].layerY - target.getBoundingClientRect().top;
+    const x = event.targetTouches[0].pageX - target.getBoundingClientRect().left;
+    const y = event.targetTouches[0].pageY - target.getBoundingClientRect().top;
     const maxW = Math.max(x, target.offsetWidth - x);
     const maxH = Math.max(y, target.offsetHeight - y);
     const size = Math.sqrt(maxW * maxW + maxH * maxH);
@@ -57,7 +57,7 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     };
 
     document.ontouchmove = function (move) {
-        if (event.targetTouches[0].layerX - move.targetTouches[0].layerX > 4 || event.targetTouches[0].layerX - move.targetTouches[0].layerX < -4 || event.targetTouches[0].layerX - move.targetTouches[0].layerY > 4 || event.targetTouches[0].layerY - move.targetTouches[0].layerY < -4) {
+        if (event.targetTouches[0].pageX - move.targetTouches[0].pageX > 4 || event.targetTouches[0].pageX - move.targetTouches[0].pageX < -4 || event.targetTouches[0].pageX - move.targetTouches[0].pageY > 4 || event.targetTouches[0].pageY - move.targetTouches[0].pageY < -4) {
             clearTimeout(timeout);
             document.ontouchcancel()
         }
@@ -75,8 +75,8 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     while (target && target.classList && !target.classList.contains("ripple")) target = target.parentNode;
     if (!target || !target.classList || !target.classList.contains("ripple")) return;
 
-    const x = event.layerX - target.getBoundingClientRect().left;
-    const y = event.layerY - target.getBoundingClientRect().top;
+    const x = event.pageX - target.getBoundingClientRect().left;
+    const y = event.pageY - target.getBoundingClientRect().top;
     const maxW = Math.max(x, target.offsetWidth - x);
     const maxH = Math.max(y, target.offsetHeight - y);
     const size = Math.sqrt(maxW * maxW + maxH * maxH);
@@ -104,7 +104,7 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     };
 
     document.onpointermove = function (move) {
-        if (event.layerX - move.x > 4 || event.layerX - move.x < -4 || event.layerY - move.y > 4 || event.layerY - move.y < -4) {
+        if (event.pageX - move.x > 4 || event.pageX - move.x < -4 || event.pageY - move.y > 4 || event.pageY - move.y < -4) {
             clearTimeout(timeout);
             document.onpointercancel();
         }
