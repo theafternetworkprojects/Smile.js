@@ -48,7 +48,10 @@ document.onpointerdown = function (event) {
         }
     };
 };
-document.body.addEventListener("touchstart",(event)=>{
+document.ontouchstart = null;
+document.ontouchend = null;
+document.ontouchmove = null;
+document.addEventListener("touchstart",(event)=>{
         if (current) {
         const remove = current;
         current = null;
@@ -60,9 +63,9 @@ document.body.addEventListener("touchstart",(event)=>{
     let target = event.target;
     while (target && target.classList && !target.classList.contains("ripple")) target = target.parentNode;
     if (!target || !target.classList || !target.classList.contains("ripple")) return;
-
-    const x = event.x - target.getBoundingClientRect().left;
-    const y = event.y - target.getBoundingClientRect().top;
+    if (event.originalEvent.touches.length > 1) return;
+    const x = event.originalEvent.touches[0].x - target.getBoundingClientRect().left;
+    const y = event.originalEvent.touches[0].y - target.getBoundingClientRect().top;
     const maxW = Math.max(x, target.offsetWidth - x);
     const maxH = Math.max(y, target.offsetHeight - y);
     const size = Math.sqrt(maxW * maxW + maxH * maxH);
@@ -84,15 +87,15 @@ document.body.addEventListener("touchstart",(event)=>{
         effect.style.transform = "scale(1)";
     }, 16);
 
-    document.body.ontouchend = function () {
-        document.body.ontouchend  = document.body.ontouchmove = null;
+    document.ontouchend = function () {
+        document.ontouchend  = document.ontouchmove = null;
         current.firstChild.style.opacity = "0";
     };
 
-    document.body.ontouchmove = function (move) {
+    document.ontouchmove = function (move) {
         if (event.x - move.x > 4 || event.x - move.x < -4 || event.y - move.y > 4 || event.y - move.y < -4) {
             clearTimeout(timeout);
-            document.body.ontouchend  = document.body.ontouchmove = null;
+            document.ontouchend  = document.ontouchmove = null;
         }
     };
 })
