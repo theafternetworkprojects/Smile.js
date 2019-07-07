@@ -27,9 +27,9 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     let target = event.target;
     while (target && target.classList && !target.classList.contains("ripple")) target = target.parentNode;
     if (!target || !target.classList || !target.classList.contains("ripple")) return;
-    if (event.originalEvent.touches.length > 1) return;
-    const x = event.originalEvent.touches[0].x - target.getBoundingClientRect().left;
-    const y = event.originalEvent.touches[0].y - target.getBoundingClientRect().top;
+    if (event.touches.length > 1) return;
+    const x = event.touches[0].x - target.getBoundingClientRect().left;
+    const y = event.touches[0].y - target.getBoundingClientRect().top;
     const maxW = Math.max(x, target.offsetWidth - x);
     const maxH = Math.max(y, target.offsetHeight - y);
     const size = Math.sqrt(maxW * maxW + maxH * maxH);
@@ -57,7 +57,7 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     };
 
     document.ontouchmove = function (move) {
-        if (event.originalEvent.touches[0].x - move.originalEvent.touches[0].x > 4 || event.originalEvent.touches[0].x - move.originalEvent.touches[0].x < -4 || event.originalEvent.touches[0].y - move.originalEvent.touches[0].y > 4 || event.originalEvent.touches[0].y - move.originalEvent.touches[0].y < -4) {
+        if (event.touches[0].x - move.touches[0].x > 4 || event.touches[0].x - move.touches[0].x < -4 || event.touches[0].y - move.touches[0].y > 4 || event.touches[0].y - move.touches[0].y < -4) {
             clearTimeout(timeout);
             document.ontouchcancel()
         }
