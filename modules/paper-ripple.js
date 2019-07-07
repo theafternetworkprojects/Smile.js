@@ -94,7 +94,7 @@ window.ontouchstart?document.addEventListener("touchstart",(event)=>{
             document.onpointercancel();
         }
     };
-};
+});
 document.ontouchstart = null;
 document.ontouchend = null;
 document.ontouchmove = null;
