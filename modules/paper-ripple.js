@@ -42,9 +42,9 @@ window.ontouchstart?document.addEventListener("touchstart",(event)=>{
     };
 
     document.ontouchmove = function (move) {
-        if (event.x - move.x > 4 || event.x - move.x < -4 || event.y - move.y > 4 || event.y - move.y < -4) {
+        if (event.originalEvent.touches[0].x - move.originalEvent.touches[0].x > 4 || event.originalEvent.touches[0].x - move.originalEvent.touches[0].x < -4 || event.originalEvent.touches[0].y - move.originalEvent.touches[0].y > 4 || event.originalEvent.touches[0].y - move.originalEvent.touches[0].y < -4) {
             clearTimeout(timeout);
-            document.ontouchend  = document.ontouchmove = null;
+            document.ontouchcancel()
         }
     };
 }):document.addEventListener("mousedown",function (event) {
