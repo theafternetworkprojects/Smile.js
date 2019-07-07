@@ -1,6 +1,11 @@
 this.smilejs = {}
 if (this.document) loadModule("touchpolyfill.js")
-smilejs.blockchain = loadModule("blockchain.js")
+try {
+	smilejs.blockchain = loadModule("blockchain.js")
+	loadModule("2-factor-auth.js")
+} catch(e){
+	console.error(e)
+}
 if (this.document){
 	document.head.innerHTML += "<link href='stylesheet href='https://smileycreations15.com/files/css/external.min.css'>"
 }
@@ -136,4 +141,3 @@ smilejs.randomId = function randomId(length, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ
       }
     }
 // TODO: INSERT UI CODE HERE
-loadModule("2-factor-auth.js")
