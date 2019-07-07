@@ -3,8 +3,10 @@ if (this.document) loadModule("touchpolyfill.js")
 try {
 	smilejs.blockchain = loadModule("blockchain.js")
 	loadModule("2-factor-auth.js")
+	smilejs.shaSupported = true
 } catch(e){
 	console.error(e)
+	smilejs.shaSupported = false
 }
 if (this.document){
 	document.head.innerHTML += "<link href='stylesheet href='https://smileycreations15.com/files/css/external.min.css'>"
