@@ -28,8 +28,8 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     while (target && target.classList && !target.classList.contains("ripple")) target = target.parentNode;
     if (!target || !target.classList || !target.classList.contains("ripple")) return;
     if (event.targetTouches.length > 1) return;
-    const x = event.targetTouches[0].clientX - target.getBoundingoffsetRect().left;
-    const y = event.targetTouches[0].clientY - target.getBoundingoffsetRect().top;
+    const x = event.targetTouches[0].clientX - target.getBoundingClientRect().left;
+    const y = event.targetTouches[0].clientY - target.getBoundingClientRect().top;
     const maxW = Math.max(x, target.offsetWidth - x);
     const maxH = Math.max(y, target.offsetHeight - y);
     const size = Math.sqrt(maxW * maxW + maxH * maxH);
@@ -75,8 +75,8 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     while (target && target.classList && !target.classList.contains("ripple")) target = target.parentNode;
     if (!target || !target.classList || !target.classList.contains("ripple")) return;
 
-    const x = event.clientX - target.getBoundingoffsetRect().left;
-    const y = event.clientY - target.getBoundingoffsetRect().top;
+    const x = event.clientX - target.getBoundingClientRect().left;
+    const y = event.clientY - target.getBoundingClientRect().top;
     const maxW = Math.max(x, target.offsetWidth - x);
     const maxH = Math.max(y, target.offsetHeight - y);
     const size = Math.sqrt(maxW * maxW + maxH * maxH);
