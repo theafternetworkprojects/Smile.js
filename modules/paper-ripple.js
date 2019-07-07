@@ -42,7 +42,7 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     effect.style.left = (x - size) + "px";
     effect.style.height = size * 2 + "px";
     effect.style.width = size * 2 + "px";
-    effect.style.background = target.getAttribute("ripple-color") || (this.globalThis || this).smilejs.paper.rippleColor;
+    effect.style.background = target.getAttribute("ripple-color") || window.smilejs.paper.rippleColor;
     parent.appendChild(effect);
 
     current = parent;
@@ -89,7 +89,7 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     effect.style.left = (x - size) + "px";
     effect.style.height = size * 2 + "px";
     effect.style.width = size * 2 + "px";
-    effect.style.background = target.getAttribute("ripple-color") || (this.globalThis || this).smilejs.paper.rippleColor;
+    effect.style.background = target.getAttribute("ripple-color") || window.smilejs.paper.rippleColor;
     parent.appendChild(effect);
 
     current = parent;
