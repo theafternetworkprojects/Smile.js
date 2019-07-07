@@ -1,4 +1,5 @@
 this.smilejs = {}
+if (this.document) loadModule("touchpolyfill.js")
 smilejs.blockchain = loadModule("blockchain.js")
 if (this.document){
 	document.head.innerHTML += "<link href='stylesheet href='https://smileycreations15.com/files/css/external.min.css'>"
