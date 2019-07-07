@@ -28,10 +28,10 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     while (target && target.classList && !target.classList.contains("ripple")) target = target.parentNode;
     if (!target || !target.classList || !target.classList.contains("ripple")) return;
     if (event.targetTouches.length > 1) return;
-    const x = event.targetTouches[0].pageX - target.getBoundingClientRect().left;
-    const y = event.targetTouches[0].pageY - target.getBoundingClientRect().top;
-    const maxW = Math.max(x, target.pageWidth - x);
-    const maxH = Math.max(y, target.pageHeight - y);
+    const x = event.targetTouches[0].clientX - target.getBoundingClientRect().left;
+    const y = event.targetTouches[0].clientY - target.getBoundingClientRect().top;
+    const maxW = Math.max(x, target.offsetWidth - x);
+    const maxH = Math.max(y, target.offsetHeight - y);
     const size = Math.sqrt(maxW * maxW + maxH * maxH);
 
     const parent = document.createElement("paper-ripple");
@@ -57,7 +57,7 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     };
 
     document.ontouchmove = function (move) {
-        if (event.targetTouches[0].pageX - move.targetTouches[0].pageX > 4 || event.targetTouches[0].pageX - move.targetTouches[0].pageX < -4 || event.targetTouches[0].pageX - move.targetTouches[0].pageY > 4 || event.targetTouches[0].pageY - move.targetTouches[0].pageY < -4) {
+        if (event.targetTouches[0].clientX - move.targetTouches[0].clientX > 4 || event.targetTouches[0].clientX - move.targetTouches[0].clientX < -4 || event.targetTouches[0].clientX - move.targetTouches[0].clientY > 4 || event.targetTouches[0].clientY - move.targetTouches[0].clientY < -4) {
             clearTimeout(timeout);
             document.ontouchcancel()
         }
@@ -75,10 +75,10 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     while (target && target.classList && !target.classList.contains("ripple")) target = target.parentNode;
     if (!target || !target.classList || !target.classList.contains("ripple")) return;
 
-    const x = event.x - target.getBoundingClientRect().left;
-    const y = event.y - target.getBoundingClientRect().top;
-    const maxW = Math.max(x, target.pageWidth - x);
-    const maxH = Math.max(y, target.pageHeight - y);
+    const x = event.clientX - target.getBoundingClientRect().left;
+    const y = event.clientY - target.getBoundingClientRect().top;
+    const maxW = Math.max(x, target.offsetWidth - x);
+    const maxH = Math.max(y, target.offsetHeight - y);
     const size = Math.sqrt(maxW * maxW + maxH * maxH);
 
     const parent = document.createElement("paper-ripple");
@@ -104,7 +104,7 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
     };
 
     document.onpointermove = function (move) {
-        if (event.pageX - move.x > 4 || event.pageX - move.x < -4 || event.pageY - move.y > 4 || event.pageY - move.y < -4) {
+        if (event.clientX - move.x > 4 || event.clientX - move.x < -4 || event.clientY - move.y > 4 || event.clientY - move.y < -4) {
             clearTimeout(timeout);
             document.onpointercancel();
         }
