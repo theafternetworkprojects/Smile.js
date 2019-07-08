@@ -98,12 +98,18 @@ is_touch_device()?document.addEventListener("touchstart",(event)=>{
         effect.style.transform = "scale(1)";
     }, 16);
 
-    document.onpointerup = document.onpointercancel = function () {
-        document.onpointerup = document.onpointercancel = document.onpointermove = null;
+    document.onpointerup = document.onpointercancel = document.onmouseup = function () {
+        document.onpointerup = document.onpointercancel = document.onpointermove = document.onmousemove = document.onmouseup = null;
         current.firstChild.style.opacity = "0";
     };
 
     document.onpointermove = function (move) {
+        if (event.clientX - move.x > 4 || event.clientX - move.x < -4 || event.clientY - move.y > 4 || event.clientY - move.y < -4) {
+            clearTimeout(timeout);
+            document.onpointercancel();
+        }
+    };
+    document.onmousemove = function (move) {
         if (event.clientX - move.x > 4 || event.clientX - move.x < -4 || event.clientY - move.y > 4 || event.clientY - move.y < -4) {
             clearTimeout(timeout);
             document.onpointercancel();
