@@ -68,6 +68,50 @@ paper-ripple {
   left:5px;
   align-self:center;
 }
+.card {
+	position: relative;
+	float: left;
+	height: 160px;
+	width: 320px;
+	background: #FFF;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
+	border-radius: 2px;
+	cursor: pointer;
+}
+.fab {
+	position: relative;
+	float: left;
+	height: 56px;
+	width: 56px;
+	background: #FFF;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
+	border-radius: 50%;
+	cursor: pointer;
+}
+.fab > svg {
+	position: absolute;
+	top: 16px;
+	left: 16px;
+	height: 24px;
+	width: 24px;
+	fill: #757575;
+}
+.icon {
+	position: relative;
+	float: left;
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+.icon > svg {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	height: 24px;
+	width: 24px;
+	fill: #757575;
+}
 </style>`;	
 // if (document.readyState === "completed"){
 // 	document.body.innerHTML = "<paper>" + document.body.innerHTML + "</paper>"
