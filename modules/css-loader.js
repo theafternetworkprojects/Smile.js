@@ -70,7 +70,6 @@ paper-ripple {
 }
 .card {
 	position: relative;
-	float: left;
 	height: 160px;
 	width: 320px;
 	background: #FFF;
@@ -80,7 +79,6 @@ paper-ripple {
 }
 .fab {
 	position: relative;
-	float: left;
 	height: 56px;
 	width: 56px;
 	background: #FFF;
@@ -98,7 +96,6 @@ paper-ripple {
 }
 .icon {
 	position: relative;
-	float: left;
 	height: 40px;
 	width: 40px;
 	border-radius: 50%;
@@ -112,7 +109,7 @@ paper-ripple {
 	width: 24px;
 	fill: #757575;
 }
-</style>`;	
+</style>`;
 // if (document.readyState === "completed"){
 // 	document.body.innerHTML = "<paper>" + document.body.innerHTML + "</paper>"
 // } else {
