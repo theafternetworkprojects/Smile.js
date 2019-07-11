@@ -1,5 +1,5 @@
 var moves = []
-var fen = new (loadModule("fen.js"))("rqkbnbnr/pppppppp/8/8/8/8/PPPPPPPP/RNKBQNRB w KQkq - 0 1")
+var fen = new (loadModule("fen.js"))("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1")
 module.exports.loadFEN = function loadFEN(fenData){
   fen = new (loadModule("fen.js"))(fenData)
 }
@@ -44,7 +44,7 @@ module.exports.movePiece = function movePiece(from, target){
   if ("•" === i2) throw new Error("Invalid move")
   i[from] = "-"
   var eaten = false;
-  if (i[target] !== "-") eaten = true;
+  if (i[target] !== "-") eaten = i[target];
   i[target] = i2
   module.exports.assembleBoard(i)
   moves[moves.length] = (("P"===i2.toUpperCase() && eaten)?from.charAt(0):"") + ("P"===i2.toUpperCase()?"":i2.toUpperCase()) + (eaten?"x":"") + target
