@@ -39,13 +39,18 @@ module.exports.movePiece = function movePiece(from, target){
   var obj = parseBoard().object;
   var i = obj;
   var i2 = obj[from]
+  if (i2.toUpperCase() !== i2 && "w" === fen.turn) throw new Error("Invalid move")
+  if (i2.toUpperCase() === i2 && "b" === fen.turn) throw new Error("Invalid move")
   i[from] = "-"
   var eaten = false;
   if (i[target] !== "-") eaten = true;
   i[target] = i2
   assembleBoard(i)
-  moves[moves.length] = ("P"===i2.toUpperCase()?"":i2.toUpperCase()) + target
+  moves[moves.length] = (("P"===i2.toUpperCase() && eaten)?from.charAt(0):"") + ("P"===i2.toUpperCase()?"":i2.toUpperCase()) + (eaten?"x":"") + target
   fen.turn = ("w" === fen.turn?fen.turn = "b":fen.turn = "w")
   return eaten
 }
 module.exports.setMoves = (move)=>{moves = move}
+module.exports.chessNotation = ()=>{
+  moves.join(" ")
+}
