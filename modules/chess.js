@@ -20,7 +20,8 @@ module.exports.parseBoard = function parseBoard(){
   return {
     humanReadable: out,
     object: out1,
-    moves: moves
+    moves: moves,
+    FEN: fen.toString()
   }
 }
 module.exports.assembleBoard = function assembleBoard(obj){
