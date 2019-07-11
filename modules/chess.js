@@ -36,16 +36,17 @@ module.exports.assembleBoard = function assembleBoard(obj){
 }
 module.exports.movePiece = function movePiece(from, target){
   if (moves.length % 3 === 0) moves[moves.length] = `${(moves.length / 3) + 1}.`
-  var obj = parseBoard().object;
+  var obj = module.exports.parseBoard().object;
   var i = obj;
   var i2 = obj[from]
   if (i2.toUpperCase() !== i2 && "w" === fen.turn) throw new Error("Invalid move")
   if (i2.toUpperCase() === i2 && "b" === fen.turn) throw new Error("Invalid move")
+  if ("•" === i2) throw new Error("Invalid move")
   i[from] = "-"
   var eaten = false;
   if (i[target] !== "-") eaten = true;
   i[target] = i2
-  assembleBoard(i)
+  module.exports.assembleBoard(i)
   moves[moves.length] = (("P"===i2.toUpperCase() && eaten)?from.charAt(0):"") + ("P"===i2.toUpperCase()?"":i2.toUpperCase()) + (eaten?"x":"") + target
   fen.turn = ("w" === fen.turn?fen.turn = "b":fen.turn = "w")
   return eaten
