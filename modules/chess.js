@@ -42,6 +42,8 @@ module.exports.movePiece = function movePiece(from, target){
   var i2 = obj[from]
   if (i2.toUpperCase() !== i2 && "w" === fen.turn) throw new Error("Invalid move")
   if (i2.toUpperCase() === i2 && "b" === fen.turn) throw new Error("Invalid move")
+  if (i2.toLowerCase() === "n" && !validChessKnightMove(from,target,"w" === fen.turn)) throw new Error("Invalid move")
+  if (i2.toLowerCase() === "r" && !validChessRookMove(from,target,"w" === fen.turn)) throw new Error("Invalid move")
   if ("•" === i2) throw new Error("Invalid move")
   i[from] = "-"
   var eaten = false;
@@ -55,4 +57,16 @@ module.exports.movePiece = function movePiece(from, target){
 module.exports.setMoves = (move)=>{moves = move}
 module.exports.chessNotation = ()=>{
   moves.join(" ")
+}
+function validChessKnightMove(start,end,white){
+  var knight = loadModule("chess-knight.js")
+  if (!knight(start).includes(end)) return false;
+  var obj = module.exports.parseBoard().object;
+  return true
+}
+function validChessRookMove(start,end,white){
+  var obj = module.exports.parseBoard().object;
+  if (start.charAt(0) === end.charAt(0) && start.charAt(1) !== end.charAt(1)) return true;
+  if (start.charAt(0) !== end.charAt(0) && start.charAt(1) === end.charAt(1)) return true;
+  return false;
 }
