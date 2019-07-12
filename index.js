@@ -1,1 +1,1 @@
-if (this.window) loadModule("core-main.js");
+loadModule("core-main.js");
