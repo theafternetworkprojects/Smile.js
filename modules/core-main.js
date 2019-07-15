@@ -142,7 +142,7 @@ smilejs.randomId = function randomId(length, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ
       div.id = id
       document.body.appendChild(div)
       div = document.getElementById(id + "-modal")
-      smileycreations15_prototype.trapFocus(div)
+      smilejs.ui.trapFocus(div)
       return {
         "element": document.getElementById(id),
         "modal": document.getElementById(id + "-modal")
