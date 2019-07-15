@@ -706,9 +706,24 @@ paper-ripple {
   border-style: solid;
   border-color: black transparent transparent transparent;
 }
-
+.topbar {
+  z-index: 1000000;
+  align-content: center;
+  box-shadow: 0 -1px 20px 0 black;
+  display: block;
+  position: sticky;
+  overflow: scroll;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #159957;
+  background-image: linear-gradient(120deg,#155799,#159957);
+}
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+.notify {
+  z-index:1000000000;
 }
 </style>`;
 // if (document.readyState === "completed"){
