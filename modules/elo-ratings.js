@@ -6,6 +6,7 @@ module.exports = class Elo {
     this.opponentRatingsTotal = 0;
   }
   get rating(){
+    if ((this.wins + this.loses + this.draws) === 0) return 0;
     return ((this.opponentRatingsTotal + (400 * (this.wins - this.loses)))) / (this.wins + this.loses + this.draws)
   }
 }
