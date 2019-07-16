@@ -14,11 +14,12 @@ if (this.document){
 smilejs.chess = function () {
 	return loadModule("chess.js")
 }
+smilejs.chess.Elo = loadModule("elo-ratings.js")
 smilejs.ui = {}
 try {
 smilejs.paper = loadModule("paper.js")
 } catch(e){
-	
+
 }
 smilejs.ui.notify = function notify(location = "top-left", type = "plain", dialogContent, black = true) {
 			let dialog = document.createElement("div")
