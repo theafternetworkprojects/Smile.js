@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Jeff Hlywa (jhlywa@gmail.com)
+ * Copyright (c) 2019, smileycreations15 (me@smileycreations15.com)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,14 +24,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  *----------------------------------------------------------------------------*/
-
-/* minified license below  */
-
-/* @license
- * Copyright (c) 2018, Jeff Hlywa (jhlywa@gmail.com)
- * Released under the BSD license
- * https://github.com/jhlywa/chess.js/blob/master/LICENSE
- */
 
 var Chess = function(fen) {
   var BLACK = 'b';
