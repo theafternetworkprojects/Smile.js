@@ -120,7 +120,7 @@ var getBestMove = function (game,depth) {
     var depth = depth;
 
     var d = new Date().getTime();
-    var bestMove = minimaxRoot(depth, game, game.turn() === "w");
+    var bestMove = minimaxRoot(depth, game, true);
     var d2 = new Date().getTime();
     var moveTime = (d2 - d);
     var positionsPerS = ( positionCount * 1000 / moveTime);
