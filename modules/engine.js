@@ -97,9 +97,9 @@ var getPieceValue = function (piece, x, y) {
     }
     var getAbsoluteValue = function (piece) {
         switch (piece.type){
-          case "p": return 20000
+          case "p": return 7500
           case "r": return 50000
-          case "n": return 30000
+          case "n": return 35000
           case "b": return 37500
           case "q": return 90000
           case "k": return 900000
