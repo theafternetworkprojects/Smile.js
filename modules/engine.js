@@ -4,7 +4,7 @@ var positionCount, i = 0;
 var minimaxRoot = function(depth, game, isMaximisingPlayer) {
 
     var newGameMoves = game.moves();
-    var bestMove = -9999;
+    var bestMove = -9999999;
     var bestMoveFound;
     var i = 0;
     while (i < newGameMoves.length) {
@@ -16,7 +16,7 @@ var minimaxRoot = function(depth, game, isMaximisingPlayer) {
         } else {
           game.undo();
           game.move(newGameMove);
-          var value = minimax(depth - 1, game, -100000, 100000, !isMaximisingPlayer);
+          var value = minimax(depth - 1, game, -10000000, 10000000, !isMaximisingPlayer);
           game.undo();
           if(value >= bestMove) {
               bestMove = value;
@@ -30,7 +30,7 @@ var minimaxRoot = function(depth, game, isMaximisingPlayer) {
       while (i < newGameMoves.length) {
           var newGameMove = newGameMoves[i]
             game.move(newGameMove);
-            var value = minimax(depth - 1, game, -100000, 100000, !isMaximisingPlayer);
+            var value = minimax(depth - 1, game, -10000000, 10000000, !isMaximisingPlayer);
             game.undo();
             if(value >= bestMove) {
                 bestMove = value;
@@ -51,7 +51,7 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
     var newGameMoves = game.moves();
 
     if (isMaximisingPlayer) {
-        var bestMove = -99999;
+        var bestMove = -9999999;
         while (i < newGameMoves.length){
           game.move(newGameMoves[i]);
           bestMove = Math.max(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
@@ -64,7 +64,7 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
         }
         return bestMove;
     } else {
-        var bestMove = 99999;
+        var bestMove = 9999999;
         while (i < newGameMoves.length){
           game.move(newGameMoves[i]);
           bestMove = Math.min(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
@@ -97,12 +97,12 @@ var getPieceValue = function (piece, x, y) {
     }
     var getAbsoluteValue = function (piece) {
         switch (piece.type){
-          case "p": return 100
-          case "r": return 500
-          case "n": return 300
-          case "b": return 350
-          case "q": return 900
-          case "k": return 9000
+          case "p": return 20000
+          case "r": return 50000
+          case "n": return 30000
+          case "b": return 37500
+          case "q": return 90000
+          case "k": return 900000
 
         }
         throw "Unknown piece type: " + piece.type;
