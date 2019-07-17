@@ -44,6 +44,7 @@ if (this.document){
 }
 smilejs.chess = loadModule("chess.js")
 smilejs.chess.Elo = loadModule("elo-ratings.js")
+smilejs.chess.engine = loadModule("engine.js")
 smilejs.ui = {}
 try {
 smilejs.paper = loadModule("paper.js")
