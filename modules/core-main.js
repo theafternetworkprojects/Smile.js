@@ -11,9 +11,7 @@ try {
 if (this.document){
 	document.head.innerHTML += "<link href='stylesheet href='https://smileycreations15.com/files/css/external.min.css'>"
 }
-smilejs.chess = function () {
-	return loadModule("chess.js")
-}
+smilejs.chess = loadModule("chess.js")
 smilejs.chess.Elo = loadModule("elo-ratings.js")
 smilejs.ui = {}
 try {
