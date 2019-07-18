@@ -34,7 +34,6 @@ bundles[0] = "(function(){", bundles[1] = "var moduleCache = {};var assets = {}"
       fs.writeFileSync("out.js", bundles.join("\n"));
       console.log("Minifying")
       execSync("uglifyjs -o out.min.js out.js");
-      execSync("echo >> out.min.js;echo '//# sourceURL=smileycreations15://smilejs/raw/bundle.js' >> out.min.js");
     });
     });
 });
