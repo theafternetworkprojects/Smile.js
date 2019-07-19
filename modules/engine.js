@@ -1,39 +1,37 @@
 var game = loadModule("chess.js")()
 var positionCount, i = 0;
-
 var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     var i = 0;
     var newGameMoves = game.moves();
-    var bestMove = -9999;
+    var bestMove = isMaximisingPlayer?-9999:9999;
     var bestMoveFound;
     while (i < newGameMoves.length) {
-      game.move(newGameMoves[i])
-      if (game.in_threefold_repetition()){
-        game.undo()
-      } else {
-        game.undo()
-        var newGameMove = newGameMoves[i]
-        game.move(newGameMove);
-        var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
-        game.undo();
-        if(value >= bestMove) {
-            bestMove = value;
-            bestMoveFound = newGameMove;
-        }
-      }
-      i++
-    }
-    if (bestMoveFound === undefined){
-      while (i < newGameMoves.length) {
-        var newGameMove = newGameMoves[i]
-        game.move(newGameMove);
-        var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
-        game.undo();
-        if(value >= bestMove) {
-            bestMove = value;
-            bestMoveFound = newGameMove;
+        game.move(newGameMoves[i]);
+        if (game.in_threefold_repetition()){
+          game.undo()
+        } else {
+          // var newGameMove = newGameMoves[i]
+          var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
+          game.undo();
+          if(value >= bestMove) {
+              bestMove = value;
+              bestMoveFound = newGameMoves[i];
+          }
         }
         i++
+    }
+    if (bestMoveFound === undefined){
+      i = 0;
+      while (i < newGameMoves.length) {
+          // var newGameMove = newGameMoves[i]
+          game.move(newGameMoves[i]);
+          var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
+          game.undo();
+          if(value >= bestMove) {
+              bestMove = value;
+              bestMoveFound = newGameMoves[i];
+          }
+          i++
       }
     }
     return bestMoveFound;
@@ -44,9 +42,10 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
     if (depth === 0) {
         return -evaluateBoard(game.board());
     }
+
     var newGameMoves = game.moves();
+    var i = 0;
     if (isMaximisingPlayer) {
-        var i = 0;
         var bestMove = -9999;
         while (i < newGameMoves.length) {
             game.move(newGameMoves[i]);
@@ -54,21 +53,29 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
             game.undo();
             alpha = Math.max(alpha, bestMove);
             if (beta <= alpha) {
+                beta = bestMove
                 return bestMove;
+            }
+            if (alpha < beta) {
+                // beta = alpha;
+                return beta
             }
             i++
         }
         return bestMove;
     } else {
-        var i = 0;
         var bestMove = 9999;
         while (i < newGameMoves.length) {
             game.move(newGameMoves[i]);
             bestMove = Math.min(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
             game.undo();
             beta = Math.min(beta, bestMove);
-            if (beta <= alpha) {
+            if (beta >= alpha) {
+                alpha = bestMove
                 return bestMove;
+            }
+            if (alpha > beta) {
+                return alpha
             }
             i++
         }
@@ -78,13 +85,10 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
 
 var evaluateBoard = function (board) {
     var totalEvaluation = 0;
-    var j = 0, i = 0;
-    while (i < 8){
-        while (j < 8){
+    for (var i = 0; i < 8; i++) {
+        for (var j = 0; j < 8; j++) {
             totalEvaluation = totalEvaluation + getPieceValue(board[i][j], i ,j);
-            j++
         }
-        i++
     }
     return totalEvaluation;
 };
@@ -176,27 +180,26 @@ var kingEvalBlack = reverseArray(kingEvalWhite);
 
 
 var getPieceValue = function (piece, x, y) {
+if (piece === null) {
+    return 0;
+}
 var getAbsoluteValue = function (piece, isWhite, x ,y) {
-    switch (piece.type){
-      // case "p": return 10 + ( isWhite ? pawnEvalWhite[y][x] : pawnEvalBlack[y][x] );
-      // case "r": return 50 + ( isWhite ? rookEvalWhite[y][x] : rookEvalBlack[y][x] );
-      // case "n": return 30 + knightEval[y][x];
-      // case "b": return 30 + ( isWhite ? bishopEvalWhite[y][x] : bishopEvalBlack[y][x] );
-      // case "q": return 90 + evalQueen[y][x];
-      // case "k": return 900 + ( isWhite ? kingEvalWhite[y][x] : kingEvalBlack[y][x] );
-      case "p": return 10 + ( isWhite ? pawnEvalWhite[y][x] : pawnEvalBlack[y][x] );
-      case "r": return 50 + ( isWhite ? rookEvalWhite[y][x] : rookEvalBlack[y][x] );
-      case "n": return 30 + knightEval[y][x];
-      case "b": return 30 + ( isWhite ? bishopEvalWhite[y][x] : bishopEvalBlack[y][x] );
-      case "q": return 90 + evalQueen[y][x];
-      case "k": return 900 + ( isWhite ? kingEvalWhite[y][x] : kingEvalBlack[y][x] );
-      default: return 0
+    if (piece.type === 'p') {
+        return 10 + ( isWhite ? pawnEvalWhite[y][x] : pawnEvalBlack[y][x] );
+    } else if (piece.type === 'r') {
+        return 50 + ( isWhite ? rookEvalWhite[y][x] : rookEvalBlack[y][x] );
+    } else if (piece.type === 'n') {
+        return 30 + knightEval[y][x];
+    } else if (piece.type === 'b') {
+        return 30 + ( isWhite ? bishopEvalWhite[y][x] : bishopEvalBlack[y][x] );
+    } else if (piece.type === 'q') {
+        return 90 + evalQueen[y][x];
+    } else if (piece.type === 'k') {
+        return 900 + ( isWhite ? kingEvalWhite[y][x] : kingEvalBlack[y][x] );
     }
     throw "Unknown piece type: " + piece.type;
 };
-switch (piece){
-  case null: return 0;
-}
+
   var absoluteValue = getAbsoluteValue(piece, piece.color === 'w', x ,y);
   return piece.color === 'w' ? absoluteValue : -absoluteValue;
 };
