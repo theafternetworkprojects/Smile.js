@@ -1,9 +1,10 @@
 var game = loadModule("chess.js")()
 var positionCount, i = 0;
+
 var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     var i = 0;
     var newGameMoves = game.moves();
-    var bestMove = isMaximisingPlayer?-9999:9999;
+    var bestMove = -9999;
     var bestMoveFound;
     while (i < newGameMoves.length) {
         game.move(newGameMoves[i]);
@@ -57,7 +58,6 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
                 return bestMove;
             }
             if (alpha < beta) {
-                // beta = alpha;
                 return beta
             }
             i++
@@ -75,7 +75,7 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
                 return bestMove;
             }
             if (alpha > beta) {
-                return alpha
+              return alpha
             }
             i++
         }
