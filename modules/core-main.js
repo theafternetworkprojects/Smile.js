@@ -36,7 +36,6 @@ try {
 	loadModule("2-factor-auth.js")
 	smilejs.shaSupported = true
 } catch(e){
-	console.error(e)
 	smilejs.shaSupported = false
 }
 if (this.document){
