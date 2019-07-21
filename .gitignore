@@ -5,7 +5,7 @@ test.js
 package.json
 package-lock.json
 build/
-assembly/
 node_modules
 tmp
 build.sh
+.idea

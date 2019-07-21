@@ -178,4 +178,3 @@ smilejs.randomId = function randomId(length, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ
         "modal": document.getElementById(id + "-modal")
       }
     }
-// TODO: INSERT UI CODE HERE

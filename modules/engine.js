@@ -3,8 +3,12 @@ var positionCount, i = 0;
 
 var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     var i = 0;
+    // //debug:
+    // var d = new Date().getTime();
+    // //enddebug:
+    var alpha = -Infinity, beta = Infinity
     var newGameMoves = game.moves();
-    var bestMove = -9999;
+    var bestMove = -Infinity
     var bestMoveFound;
     while (i < newGameMoves.length) {
         game.move(newGameMoves[i]);
@@ -12,7 +16,7 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
           game.undo()
         } else {
           // var newGameMove = newGameMoves[i]
-          var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
+          var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer, newGameMoves[i]);
           game.undo();
           if(value >= bestMove) {
               bestMove = value;
@@ -26,50 +30,67 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
       while (i < newGameMoves.length) {
           // var newGameMove = newGameMoves[i]
           game.move(newGameMoves[i]);
-          var value = minimax(depth - 1, game, -10000, 10000, !isMaximisingPlayer);
+          var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer, newGameMoves[i]);
           game.undo();
-          if(value >= bestMove) {
+          if((isMaximisingPlayer && value >= bestMove) || (!isMaximisingPlayer && value <= bestMove)) {
               bestMove = value;
               bestMoveFound = newGameMoves[i];
           }
           i++
       }
     }
+    // //debug:
+    // var d2 = new Date().getTime();
+    // console.log(` time ${d2 - d}`)
+    // //enddebug:
     return bestMoveFound;
 };
 
-var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
+var minimax = function (depth, game, alpha, beta, isMaximisingPlayer, tree) {
     positionCount++;
+    // //debug:
+    // process.stdout.write(`\r${positionCount} nodes depth ${depth}`)
+    // //enddebug:
     if (depth === 0) {
-        return -evaluateBoard(game.board());
+        return isMaximisingPlayer?evaluateBoard(game.board()):-evaluateBoard(game.board());
     }
 
     var newGameMoves = game.moves();
     var i = 0;
     if (isMaximisingPlayer) {
-        var bestMove = -9999;
+        var bestMove = -Infinity;
         while (i < newGameMoves.length) {
             game.move(newGameMoves[i]);
-            bestMove = Math.max(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
+            // //debug:
+            // process.stdout.write(`\r\x1b[2K${positionCount} nodes depth ${depth} move ${tree + " " + newGameMoves[i]}`)
+            // //enddebug:
+            var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer, tree + " " + newGameMoves[i])
+            bestMove = Math.max(bestMove, value);
+            alpha = Math.max(alpha, bestMove);
             game.undo();
+
             alpha = Math.max(alpha, bestMove);
             if (beta <= alpha) {
                 // return alpha;
-                return bestMove
+                break
             }
             i++
         }
         return bestMove;
     } else {
-        var bestMove = 9999;
+        var bestMove = Infinity;
         while (i < newGameMoves.length) {
             game.move(newGameMoves[i]);
-            bestMove = Math.min(bestMove, minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer));
+            // //debug:
+            // process.stdout.write(`\r\x1b[2K${positionCount} nodes depth ${depth} move ${tree + " " + newGameMoves[i]}`)
+            // //enddebug:
+            var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer, tree + " " + newGameMoves[i])
+            bestMove = Math.min(bestMove, value);
+            beta = Math.min(alpha, bestMove);
             game.undo();
-            beta = Math.min(beta, bestMove);
-            if (beta >= alpha) {
+            if (beta <= alpha) {
                 // return beta;
-                return bestMove;
+                break
             }
             i++
         }
@@ -178,18 +199,13 @@ if (piece === null) {
     return 0;
 }
 var getAbsoluteValue = function (piece, isWhite, x ,y) {
-    if (piece.type === 'p') {
-        return 10 + ( isWhite ? pawnEvalWhite[y][x] : pawnEvalBlack[y][x] );
-    } else if (piece.type === 'r') {
-        return 50 + ( isWhite ? rookEvalWhite[y][x] : rookEvalBlack[y][x] );
-    } else if (piece.type === 'n') {
-        return 30 + knightEval[y][x];
-    } else if (piece.type === 'b') {
-        return 30 + ( isWhite ? bishopEvalWhite[y][x] : bishopEvalBlack[y][x] );
-    } else if (piece.type === 'q') {
-        return 90 + evalQueen[y][x];
-    } else if (piece.type === 'k') {
-        return 900 + ( isWhite ? kingEvalWhite[y][x] : kingEvalBlack[y][x] );
+    switch (piece.type){
+      case "p":return 10 + ( isWhite ? pawnEvalWhite[y][x] : pawnEvalBlack[y][x] );
+      case "r":return 50 + ( isWhite ? rookEvalWhite[y][x] : rookEvalBlack[y][x] );
+      case "n":return 30 + knightEval[y][x];
+      case "b":return 30 + ( isWhite ? bishopEvalWhite[y][x] : bishopEvalBlack[y][x] );
+      case "q":return 90 + evalQueen[y][x];
+      case "k":return 900 + ( isWhite ? kingEvalWhite[y][x] : kingEvalBlack[y][x] );
     }
     throw "Unknown piece type: " + piece.type;
 };
