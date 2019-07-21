@@ -67,13 +67,19 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer, tree) {
             var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer, tree + " " + newGameMoves[i])
             bestMove = Math.max(bestMove, value);
             alpha = Math.max(alpha, bestMove);
+            var gameover = game.game_over()
+            var mate = game.in_checkmate()
             game.undo();
 
             alpha = Math.max(alpha, bestMove);
+            if (mate){
+              bestMove += alpha
+            }
             if (beta <= alpha) {
                 // return alpha;
                 break
             }
+            if (gameover && !mate) continue;
             i++
         }
         return bestMove;
@@ -87,11 +93,17 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer, tree) {
             var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer, tree + " " + newGameMoves[i])
             bestMove = Math.min(bestMove, value);
             beta = Math.min(alpha, bestMove);
+            var gameover = game.game_over()
+            var mate = game.in_checkmate()
             game.undo();
+            if (mate){
+              bestMove += beta
+            }
             if (beta <= alpha) {
                 // return beta;
                 break
             }
+            if (gameover && !mate) continue;
             i++
         }
         return bestMove;
