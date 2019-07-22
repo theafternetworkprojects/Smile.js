@@ -24,16 +24,16 @@ bundles[0] = "(function(){", bundles[1] = "var moduleCache = {};var assets = {}"
       console.log("Adding asset:", v1)
       bundles[bundles.length] = `assets["${addslashes(v1)}"] = '${addslashes(fs.readFileSync("./assets/" + v1))}';`;
       /** @type {string} */
-      bundles[bundles.length] = "function loadModule(module1){\n    var moduleSrc = moduleCache[module1];\n  var module = {exports:{}}\n  eval(moduleSrc);\n  return module.exports\n};function loadAsset(module1){\n    return assets[module1];};";
-      console.log("Adding source file:", "index.js")
-      bundles[bundles.length] = `eval('${addslashes(fs.readFileSync("index.js").toString() + "\n//# sourceURL=smileycreations15://smilejs/index.js")}');`;
-      /** @type {string} */
-      bundles[bundles.length] = "})();";
-      /** @type {string} */
-      bundles[bundles.length] = "//# sourceURL=smileycreations15://smilejs/raw/bundle.js";
-      fs.writeFileSync("out.js", bundles.join("\n"));
-      console.log("Minifying")
-      execSync("uglifyjs -o out.min.js out.js");
     });
+    bundles[bundles.length] = "function loadModule(module1){\n    var moduleSrc = moduleCache[module1];\n  var module = {exports:{}}\n  eval(moduleSrc);\n  return module.exports\n};function loadAsset(module1){\n    return assets[module1];};";
+    console.log("Adding source file:", "index.js")
+    bundles[bundles.length] = `eval('${addslashes(fs.readFileSync("index.js").toString() + "\n//# sourceURL=smileycreations15://smilejs/index.js")}');`;
+    /** @type {string} */
+    bundles[bundles.length] = "})();";
+    /** @type {string} */
+    bundles[bundles.length] = "//# sourceURL=smileycreations15://smilejs/raw/bundle.js";
+    fs.writeFileSync("out.js", bundles.join("\n"));
+    console.log("Minifying")
+    execSync("uglifyjs -o out.min.js out.js");
     });
 });

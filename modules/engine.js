@@ -10,13 +10,28 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     var newGameMoves = game.moves();
     var bestMove = -Infinity
     var bestMoveFound;
+    // while (i < newGameMoves.length) {
+    //   game.move(newGameMoves[i]);
+    //   var i = 0;
+    //   if (game.in_checkmate()){
+    //     var i = 1;
+    //   }
+    //   game.undo()
+    //   if (i === 1){
+    //     return newGameMoves[i]
+    //   }
+    // }
     while (i < newGameMoves.length) {
         game.move(newGameMoves[i]);
+        if (game.in_checkmate()){
+          return newGameMoves[i]
+        }
         if (game.in_threefold_repetition()){
           game.undo()
         } else {
           // var newGameMove = newGameMoves[i]
-          var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer, newGameMoves[i]);
+          var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer);
+          alpha = Math.max(alpha, bestMove);
           game.undo();
           if(value >= bestMove) {
               bestMove = value;
@@ -25,14 +40,16 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
         }
         i++
     }
-    if (bestMoveFound === undefined){
+    if (!bestMoveFound){
       i = 0;
+      bestMove = -Infinity
       while (i < newGameMoves.length) {
           // var newGameMove = newGameMoves[i]
           game.move(newGameMoves[i]);
-          var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer, newGameMoves[i]);
+          var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer);
+          alpha = Math.max(alpha, bestMove);
           game.undo();
-          if((isMaximisingPlayer && value >= bestMove) || (!isMaximisingPlayer && value <= bestMove)) {
+          if(value >= bestMove) {
               bestMove = value;
               bestMoveFound = newGameMoves[i];
           }
@@ -57,29 +74,21 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer, tree) {
 
     var newGameMoves = game.moves();
     var i = 0;
+    var bestMove = -Infinity;
     if (isMaximisingPlayer) {
-        var bestMove = -Infinity;
         while (i < newGameMoves.length) {
             game.move(newGameMoves[i]);
             // //debug:
             // process.stdout.write(`\r\x1b[2K${positionCount} nodes depth ${depth} move ${tree + " " + newGameMoves[i]}`)
             // //enddebug:
-            var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer, tree + " " + newGameMoves[i])
+            var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer)
             bestMove = Math.max(bestMove, value);
             alpha = Math.max(alpha, bestMove);
-            var gameover = game.game_over()
-            var mate = game.in_checkmate()
             game.undo();
-
-            alpha = Math.max(alpha, bestMove);
-            if (mate){
-              bestMove += alpha
-            }
             if (beta <= alpha) {
                 // return alpha;
                 break
             }
-            if (gameover && !mate) continue;
             i++
         }
         return bestMove;
@@ -90,20 +99,14 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer, tree) {
             // //debug:
             // process.stdout.write(`\r\x1b[2K${positionCount} nodes depth ${depth} move ${tree + " " + newGameMoves[i]}`)
             // //enddebug:
-            var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer, tree + " " + newGameMoves[i])
+            var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer)
             bestMove = Math.min(bestMove, value);
             beta = Math.min(alpha, bestMove);
-            var gameover = game.game_over()
-            var mate = game.in_checkmate()
             game.undo();
-            if (mate){
-              bestMove += beta
-            }
             if (beta <= alpha) {
                 // return beta;
                 break
             }
-            if (gameover && !mate) continue;
             i++
         }
         return bestMove;
