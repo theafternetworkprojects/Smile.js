@@ -51,7 +51,7 @@ smilejs.paper = loadModule("paper.js")
 
 }
 smilejs.compress = loadModule("compress.js")
-
+smilejs.loadCompressedLibrary = loadModule("load-compressed-lib.js")
 smilejs.ui.notify = function notify(location = "top-left", type = "plain", dialogContent, black = true) {
 			let dialog = document.createElement("div")
 			dialog.className = "notify " + location + " do-show font-notify"

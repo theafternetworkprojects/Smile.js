@@ -9,3 +9,12 @@ module.exports.str2ab = function str2ab(str) {
   }
   return buf;
 }
+module.exports.fetchArrayBuffer = function fetchArrayBuffer(url, callback) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('get', url);
+	xhr.responseType = 'arraybuffer';
+	xhr.onload = function() {
+		callback(xhr.response);
+	};
+	xhr.send();
+}
