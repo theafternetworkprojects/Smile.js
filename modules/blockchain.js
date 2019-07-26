@@ -76,6 +76,7 @@ module.exports.Blockchain = class Blockchain {
   }
   addBlock(block){
     var newBlock = block
+    block.mineBlock(this.difficulty,this.getLatestBlock().hash)
     this.chain.push(newBlock);
   }
   isChainValid(){
@@ -102,6 +103,8 @@ module.exports.RemoteBlockchain = class RemoteBlockchain {
   }
   addBlock(block){
     var newBlock = block
+    block.mineBlock(this.difficulty,this.getLatestBlock().hash)
+
     this.chain.push(newBlock);
   }
   isChainValid(){
