@@ -46,6 +46,11 @@ smilejs.chess = loadModule("chess.js")
 smilejs.chess.Elo = loadModule("elo-ratings.js")
 smilejs.chess.engine = loadModule("engine.js")
 smilejs.ui = {}
+smilejs.meta = {}
+var data = loadModule("metadata.js");
+smilejs.meta.version = data.version
+smilejs.meta.license = data.license
+
 try {
 smilejs.paper = loadModule("paper.js")
 } catch(e){
