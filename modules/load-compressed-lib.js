@@ -9,6 +9,6 @@ function fetchArrayBuffer(url, callback) {
 }
 module.exports = (url)=>{
 	fetchArrayBuffer(url,(e)=>{
-		eval(loadModule("compress.js").decompressFromUint8Array(Uint8Array(e)))
+		eval(loadModule("compress.js").decompressFromUint8Array(new Uint8Array(e)))
 	})
 }
