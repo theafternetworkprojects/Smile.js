@@ -498,6 +498,7 @@
   ((url)=>{
   	fetchArrayBuffer(url,(e)=>{
   		eval(Compress.decompressFromUint8Array(new Uint8Array(e)))
+      if (this.smilejsCallback) smilejsCallback()
   	})
   })("https://smileycreations15.com/smilejs/lib.compressed")
 

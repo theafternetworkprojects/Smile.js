@@ -33,6 +33,7 @@ this.smilejs = {}
 if (this.document) loadModule("touchpolyfill.js")
 try {
 	smilejs.blockchain = loadModule("blockchain.js")
+	smilejs.proofOfWork = loadModule("proof-of-work.js")
 	loadModule("2-factor-auth.js")
 	smilejs.shaSupported = true
 } catch(e){

@@ -23,9 +23,6 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     // }
     while (i < newGameMoves.length) {
         game.move(newGameMoves[i]);
-        if (game.in_checkmate()){
-          return newGameMoves[i]
-        }
         if (game.in_threefold_repetition()){
           game.undo()
         } else {
@@ -99,7 +96,7 @@ var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
             // //enddebug:
             var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer)
             bestMove = Math.min(bestMove, value);
-            beta = Math.min(alpha, bestMove);
+            beta = Math.min(beta, bestMove);
             game.undo();
             if (beta <= alpha) {
                 // return beta;
