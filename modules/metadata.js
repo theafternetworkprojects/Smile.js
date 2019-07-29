@@ -1,5 +1,5 @@
 module.exports = {
-  "version":"v1.0.2-beta",
+  "version":"v1.0.4-beta",
   "author":"smileycreations15",
   "license":"BSD 3-Clause",
   "tokens":[

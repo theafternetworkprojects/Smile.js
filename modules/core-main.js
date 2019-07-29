@@ -58,7 +58,7 @@ smilejs.compress = loadModule("compress.js")
 smilejs.loadCompressedLibrary = loadModule("load-compressed-lib.js")
 smilejs.ui.notify = function notify(location = "top-left", type = "plain", dialogContent, black = true) {
 			let dialog = document.createElement("div")
-			dialog.className = "notify " + location + " do-show font-notify"
+			dialog.className = "smilejs-notify smilejs-" + location + " smilejs-do-show smilejs-font-notify"
 			dialog.dataset.notificationStatus = type
 			dialog.innerHTML = dialogContent // positions : bottom-right, top-left, top-right, bar-bottom, bar-top, bottom-right, bottom-left
 			let blackText = ["success"
@@ -79,55 +79,55 @@ smilejs.ui.notify = function notify(location = "top-left", type = "plain", dialo
 
 			document.body.appendChild(dialog)
 		}
-    smilejs.ui.showLoaderOverlay = function showLoaderOverlay(id, text = null, overlayHtml = false) {
-			if (null !== document.getElementById(id)) throw new Error("The element already exists.");
-			let div = document.createElement("div")
-			let option = "center"
-
-			if (true === overlayHtml) {
-				option = "overlay"
-			}
-
-			div.className = "overlay"
-			div.id = id
-			div.style.display = "none"
-
-			if (null === text || undefined === text) {
-				div.innerHTML = '<div class="text-' + option + '"></div><div class="progress-slider"><div class="line"></div><div class="progress-subline inc"></div><div class="progress-subline dec"></div></div>'
-			} else {
-				div.innerHTML = '<div class="text-overlay">' + text + '</div><div class="progress-slider"><div class="line"></div><div class="progress-subline inc"></div><div class="progress-subline dec"></div></div>'
-			}
-
-			document.body.appendChild(div)
-			var proto = {
-
-				"element": document.getElementById(id),
-				"show": function () {
-						if (null === document.getElementById(id)) throw new Error("The element could not be found, and may be removed from the DOM.");
-						document.getElementById(id)
-							.style.display = "block"
-					}
-
-					,
-				"hide": function () {
-						if (null === document.getElementById(id)) throw new Error("The element could not be found, and may be removed from the DOM.");
-						document.getElementById(id)
-							.style.display = "none"
-					}
-
-					,
-				"remove": function () {
-					if (null === document.getElementById(id)) throw new Error("The element could not be found, and may be removed from the DOM.");
-					document.body.removeChild(document.getElementById(id))
-				}
-			}
-
-			// proto.remove = makeNative(proto.remove, "function remove(){ [native code] }")
-			// proto.show = makeNative(proto.show, "function show(){ [native code] }")
-			// proto.hide = makeNative(proto.hide, "function hide(){ [native code] }")
-			proto[Symbol.toStringTag] = "LoaderOverlay"
-			return Object.create(proto)
-		}
+    // smilejs.ui.showLoaderOverlay = function showLoaderOverlay(id, text = null, overlayHtml = false) {
+		// 	if (null !== document.getElementById(id)) throw new Error("The element already exists.");
+		// 	let div = document.createElement("div")
+		// 	let option = "center"
+		//
+		// 	if (true === overlayHtml) {
+		// 		option = "overlay"
+		// 	}
+		//
+		// 	div.className = "overlay"
+		// 	div.id = id
+		// 	div.style.display = "none"
+		//
+		// 	if (null === text || undefined === text) {
+		// 		div.innerHTML = '<div class="smilejs-text-' + option + '"></div><div class="progress-slider"><div class="line"></div><div class="progress-subline inc"></div><div class="progress-subline dec"></div></div>'
+		// 	} else {
+		// 		div.innerHTML = '<div class="smilejs-text-overlay">' + text + '</div><div class="progress-slider"><div class="line"></div><div class="progress-subline inc"></div><div class="progress-subline dec"></div></div>'
+		// 	}
+		//
+		// 	document.body.appendChild(div)
+		// 	var proto = {
+		//
+		// 		"element": document.getElementById(id),
+		// 		"show": function () {
+		// 				if (null === document.getElementById(id)) throw new Error("The element could not be found, and may be removed from the DOM.");
+		// 				document.getElementById(id)
+		// 					.style.display = "block"
+		// 			}
+		//
+		// 			,
+		// 		"hide": function () {
+		// 				if (null === document.getElementById(id)) throw new Error("The element could not be found, and may be removed from the DOM.");
+		// 				document.getElementById(id)
+		// 					.style.display = "none"
+		// 			}
+		//
+		// 			,
+		// 		"remove": function () {
+		// 			if (null === document.getElementById(id)) throw new Error("The element could not be found, and may be removed from the DOM.");
+		// 			document.body.removeChild(document.getElementById(id))
+		// 		}
+		// 	}
+		//
+		// 	// proto.remove = makeNative(proto.remove, "function remove(){ [native code] }")
+		// 	// proto.show = makeNative(proto.show, "function show(){ [native code] }")
+		// 	// proto.hide = makeNative(proto.hide, "function hide(){ [native code] }")
+		// 	proto[Symbol.toStringTag] = "LoaderOverlay"
+		// 	return Object.create(proto)
+		// }
 		smilejs.ui.trapFocus = function trapFocus(elem) {
 			var focusIndex = 0;
 			const focusable = "a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex]:not(*[tabindex='-1']), *[contenteditable]";
@@ -172,9 +172,9 @@ smilejs.randomId = function randomId(length, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ
 		}
     smilejs.ui.modal = function (html) {
       var div = document.createElement("div")
-      div.className = "grey-overlay"
+      div.className = "smilejs-grey-overlay"
       var id = smilejs.randomId(30)
-      div.innerHTML = '<div class="modal" id="' + id + '-modal">' + html + '</div>'
+      div.innerHTML = '<div class="smilejs-modal" id="' + id + '-modal">' + html + '</div>'
       div.id = id
       document.body.appendChild(div)
       div = document.getElementById(id + "-modal")
