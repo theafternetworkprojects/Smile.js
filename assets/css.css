@@ -728,7 +728,7 @@ paper-ripple {
     text-align: center;
     transition: transform var(--ripple-transition) cubic-bezier(0, 0, 0.2, 1) 0ms;
     content:"";
-    width:var(--ripple-width);
+    width:inherit;
     position:relative;
     bottom:0;
     display: flex;
@@ -741,7 +741,7 @@ paper-ripple {
 .line-ripple::before {
     border-bottom: var(--ripple-inactive-color) 2px solid;
     content:"";
-    width:var(--ripple-width);
+    width: inherit;
     position: relative;
     bottom: -2px;
     right: 0;
@@ -770,7 +770,7 @@ input.line-ripple-input {
     margin: 0em;
     height:15px;
     padding: 1px;
-    width:100px;
+    width:inherit;
 }
 input.line-ripple-input:focus {
     outline:0;
@@ -779,5 +779,4 @@ input.line-ripple-input:focus {
   --ripple-active-color: #0088FF;
   --ripple-inactive-color: #7d7d7d;
   --ripple-transition: 200ms;
-  --ripple-width:100px;
 }
