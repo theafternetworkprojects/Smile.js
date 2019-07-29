@@ -728,7 +728,7 @@ paper-ripple {
     text-align: center;
     transition: transform var(--ripple-transition) cubic-bezier(0, 0, 0.2, 1) 0ms;
     content:"";
-    width:inherit;
+    width:var(--ripple-width);
     position:relative;
     bottom:0;
     display: flex;
@@ -741,17 +741,17 @@ paper-ripple {
 .line-ripple::before {
     border-bottom: var(--ripple-inactive-color) 2px solid;
     content:"";
-    width: inherit;
+    width:var(--ripple-width);
     position: relative;
     bottom: -2px;
     right: 0;
     left: 0;
     display: flex;
 }
-.line-ripple-container:focus-within > .line-ripple::after {
+.line-ripple-input:focus+.line-ripple::after {
     transform:scaleX(1);
 }
-.line-ripple-container > input {
+input.line-ripple-input {
     border:0;
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
@@ -770,13 +770,14 @@ paper-ripple {
     margin: 0em;
     height:15px;
     padding: 1px;
-    width:inherit;
+    width:100px;
 }
-.line-ripple-container > input:focus {
+input.line-ripple-input:focus {
     outline:0;
 }
-.line-ripple-container {
+.line-ripple {
   --ripple-active-color: #0088FF;
   --ripple-inactive-color: #7d7d7d;
   --ripple-transition: 200ms;
+  --ripple-width:100px;
 }
