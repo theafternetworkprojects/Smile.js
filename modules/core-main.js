@@ -40,9 +40,6 @@ try {
 } catch(e){
 	smilejs.shaSupported = false
 }
-if (this.document){
-	document.head.innerHTML += "<link href='stylesheet href='https://smileycreations15.com/files/css/external.min.css'>"
-}
 smilejs.chess = loadModule("chess.js")
 smilejs.chess.Elo = loadModule("elo-ratings.js")
 smilejs.chess.engine = loadModule("engine.js")

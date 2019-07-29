@@ -742,14 +742,16 @@ paper-ripple {
     border-bottom: var(--ripple-inactive-color) 2px solid;
     content:"";
     width: inherit;
-    position:relative;
+    position: relative;
+    bottom: -2px;
+    right: 0;
+    left: 0;
     display: flex;
-    bottom: -20px;
 }
-.line-ripple:focus-within::after {
+.line-ripple-container:focus-within > .line-ripple::after {
     transform:scaleX(1);
 }
-.line-ripple > input {
+.line-ripple-container > input {
     border:0;
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
@@ -767,14 +769,13 @@ paper-ripple {
     cursor: text;
     margin: 0em;
     height:15px;
-    font: 400 11px system-ui;
     padding: 1px;
     width:inherit;
 }
-.line-ripple > input:focus {
+.line-ripple-container > input:focus {
     outline:0;
 }
-.line-ripple {
+.line-ripple-container {
   --ripple-active-color: #0088FF;
   --ripple-inactive-color: #7d7d7d;
   --ripple-transition: 200ms;
