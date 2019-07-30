@@ -40,6 +40,7 @@ try {
 } catch(e){
 	smilejs.shaSupported = false
 }
+smilejs.Terminal = loadModule("terminal.js")
 smilejs.chess = loadModule("chess.js")
 smilejs.chess.Elo = loadModule("elo-ratings.js")
 smilejs.chess.engine = loadModule("engine.js")
