@@ -739,7 +739,7 @@ paper-ripple {
     transform:scaleX(0);
 }
 .smilejs-line-ripple::before {
-    border-bottom: var(--ripple-inactive-color) 2px solid;
+    border-bottom: var(--ripple-inactive-color) 1px solid;
     content:"";
     width: inherit;
     position: relative;
@@ -756,6 +756,27 @@ input.smilejs-line-ripple-input {
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
     color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    height:15px;
+    padding: 1px;
+    width:inherit;
+}
+input.smilejs-line-ripple-input[disabled] {
+    border:0;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: grey;
     letter-spacing: normal;
     word-spacing: normal;
     text-transform: none;
