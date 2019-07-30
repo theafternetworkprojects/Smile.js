@@ -57,8 +57,8 @@ if (this.window){
       }
 
       let target = event.target;
-      while (target && target.classList && !target.classList.contains("ripple")) target = target.parentNode;
-      if (!target || !target.classList || !target.classList.contains("ripple")) return;
+      while (target && target.classList && !target.classList.contains("smilejs-ripple")) target = target.parentNode;
+      if (!target || !target.classList || !target.classList.contains("smilejs-ripple")) return;
       if (event.targetTouches.length > 1) return;
       const x = event.targetTouches[0].clientX - target.getBoundingClientRect().left;
       const y = event.targetTouches[0].clientY - target.getBoundingClientRect().top;
@@ -104,8 +104,8 @@ if (this.window){
       }
 
       let target = event.target;
-      while (target && target.classList && !target.classList.contains("ripple")) target = target.parentNode;
-      if (!target || !target.classList || !target.classList.contains("ripple")) return;
+      while (target && target.classList && !target.classList.contains("smilejs-ripple")) target = target.parentNode;
+      if (!target || !target.classList || !target.classList.contains("smilejs-ripple")) return;
 
       const x = event.clientX - target.getBoundingClientRect().left;
       const y = event.clientY - target.getBoundingClientRect().top;
