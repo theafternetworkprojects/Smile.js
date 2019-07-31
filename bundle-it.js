@@ -485,7 +485,118 @@ var LZString = {
 };
   return LZString;
 })();
-
+class Terminal {
+    up() {
+        process.stdout.write("\x1B[A")
+    }
+    down() {
+        process.stdout.write("\x1B[B")
+    }
+    left() {
+        process.stdout.write("\x1B[D")
+    }
+    right() {
+        process.stdout.write("\x1B[C")
+    }
+    setPosition(rowfunction, colfunction) {
+        if (0 === row || col === 0) {
+            return
+        }
+        process.stdout.write("\x1B[" + String(row) + ";" + String(col) + "H")
+    }
+    hide() {
+        process.stdout.write("\x1B[?25l")
+    }
+    show() {
+        process.stdout.write("\x1B[?12l\x1B[?25h")
+    }
+    setTextAttributeByName(name, remove = false) {
+        let properties = {
+            "bold": "1",
+            "dim": "2",
+            "underline": "4",
+            "blink": "5",
+            "reverse": "7",
+            "invert": "7",
+            "hidden": "8"
+        }
+        let propertiesRemove = {
+            "bold": "21",
+            "dim": "22",
+            "underline": "24",
+            "blink": "25",
+            "reverse": "27",
+            "invert": "27",
+            "hidden": "28"
+        }
+        if (remove) {
+            let resultValue = propertiesRemove[name]
+            process.stdout.write("\x1B[" + resultValue + "m")
+        } else {
+            let resultValue = properties[name]
+            process.stdout.write("\x1B[" + resultValue + "m")
+        }
+    }
+    saveScreenContents() {
+        process.stdout.write("\x1B[?1049h")
+    }
+    restoreScreenContents() {
+        process.stdout.write("\x1B[?1049l")
+    }
+    resetTextProperties() {
+        process.stdout.write("\x1B[0m")
+    }
+    setAnsiTextColor(color) {
+        process.stdout.write("\x1B[38;5;" + String(color) + "m")
+    }
+    setAnsiBackgroundColor(color) {
+        process.stdout.write("\x1B[48;5;" + String(color) + "m")
+    }
+    loading(txt) {
+        var P = [
+            "⠋",
+            "⠙",
+            "⠹",
+            "⠸",
+            "⠼",
+            "⠴",
+            "⠦",
+            "⠧",
+            "⠇",
+            "⠏"
+        ]
+        var x = 0;
+        process.stdout.write("\r" + P[x++] + (txt ?(" " + txt) : ""));
+        x = x % P.length
+        return setInterval(function() {
+            process.stdout.write("\r" + P[x++] + (txt ?(" " + txt) : ""));
+            x = x % P.length
+        }, 250);
+    }
+    setTabTitle(title) {
+        process.stdout.write("\x1B]1;\x07")
+        process.stdout.write("\x1B]1;" + title + "\x07")
+    }
+    setWindowTitle(title) {
+        process.stdout.write("\x1B]2;\x07")
+        process.stdout.write("\x1B]2;" + title + "\x07")
+    }
+    setDocumentTitle(title) {
+        process.stdout.write("\x1B]6;\x07")
+        process.stdout.write("\x1B]6;" + title + "\x07")
+    }
+    setWorkingDirectoryTitle(title) {
+        process.stdout.write("\x1B]7;\x07")
+        process.stdout.write("\x1B]7;" + title + "\x07")
+    }
+    bell() {
+        process.stdout.write("\x07")
+    }
+	  clearLine(){
+		    process.stdout.write("\r\x1B[2K")
+	  }
+}
+var term = new Terminal()
 /** @type {!Array} */
 var bundles = [];
 const fs = require("fs");
@@ -496,32 +607,61 @@ const {
  * @param {string} value
  * @return {?}
  */
+ function log(a = "", b = "", c = "", d = ""){
+   term.setAnsiTextColor("021")
+   process.stdout.write("ℹ ")
+   term.resetTextProperties()
+   term.setTextAttributeByName("dim")
+   process.stdout.write("｢bundler｣")
+   term.setTextAttributeByName("dim",true)
+   console.log(":",a,b,c,d)
+ }
 function addslashes(value) {
   return (value + "").replace(/[\\"']/g, "\\$&").replace(/\u0000/g, "\\0").replace(/\n/g, "\\n").replace(/\r/g, "\\r");
 }
 bundles[0] = "(function(){", bundles[1] = "var moduleCache = {};var assets = {}", fs.readdir("./modules/", (canCreateDiscussions, badgeArray) => {
   (badgeArray || []).forEach((v) => {
     /** @type {string} */
-    console.log("Adding source file:", v)
+    log("Adding source file:", v)
+    var i = term.loading("Please wait...")
     bundles[bundles.length] = `moduleCache["${addslashes(v)}"] = '${addslashes(fs.readFileSync("./modules/" + v) + "\n//# sourceURL=smileycreations15://smilejs/modules/" + v)}';`;
+    clearInterval(i);term.clearLine()
   });
   fs.readdir("./assets/", (canCreateDiscussions, badgeArray1) => {
     (badgeArray1 || []).forEach((v1) => {
       /** @type {string} */
-      console.log("Adding asset:", v1)
+      log("Adding asset:", v1)
+
+      var i = term.loading("Please wait...")
+
       bundles[bundles.length] = `assets["${addslashes(v1)}"] = '${addslashes(fs.readFileSync("./assets/" + v1))}';`;
       /** @type {string} */
+      clearInterval(i);term.clearLine()
     });
     bundles[bundles.length] = "function loadModule(module1){\n    var moduleSrc = moduleCache[module1];\n  var module = {exports:{}}\n  eval(moduleSrc);\n  return module.exports\n};function loadAsset(module1){\n    return assets[module1];};";
-    console.log("Adding source file:", "index.js")
+    log("Adding source file:", "index.js")
+    var i = term.loading("Please wait...")
+
     bundles[bundles.length] = `eval('${addslashes(fs.readFileSync("index.js").toString() + "\n//# sourceURL=smileycreations15://smilejs/index.js")}');`;
+    clearInterval(i);term.clearLine()
     /** @type {string} */
     bundles[bundles.length] = "})();";
     /** @type {string} */
+    var i = term.loading("Please wait...")
+
     bundles[bundles.length] = "//# sourceURL=smileycreations15://smilejs/raw/bundle.js";
     fs.writeFileSync("out.js", bundles.join("\n"));
-    console.log("Minifying")
+    clearInterval(i);term.clearLine()
+
+    log("Minifying")
+    var i = term.loading("Please wait...")
+
     execSync("uglifyjs -o out.min.js out.js");
+    clearInterval(i);term.clearLine()
+    log("Compressing")
+    var i = term.loading("Please wait...")
     require("fs").writeFileSync("lib.compressed",str.compressToUint8Array(require("fs").readFileSync("out.js").toString()))
+    clearInterval(i);term.clearLine()
+
     });
 });
