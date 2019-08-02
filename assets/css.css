@@ -771,6 +771,7 @@ paper-ripple {
     height:15px;
     padding: 1px;
     width:inherit;
+    resize:none;
 }
 .smilejs-line-ripple-input[disabled] {
     border:0;
