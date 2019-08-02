@@ -751,7 +751,7 @@ paper-ripple {
 .smilejs-line-ripple-input:focus+.smilejs-line-ripple::after {
     transform:scaleX(1);
 }
-input.smilejs-line-ripple-input {
+.smilejs-line-ripple-input {
     border:0;
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
@@ -772,7 +772,7 @@ input.smilejs-line-ripple-input {
     padding: 1px;
     width:inherit;
 }
-input.smilejs-line-ripple-input[disabled] {
+.smilejs-line-ripple-input[disabled] {
     border:0;
     -webkit-writing-mode: horizontal-tb !important;
     text-rendering: auto;
@@ -794,7 +794,7 @@ input.smilejs-line-ripple-input[disabled] {
     width:inherit;
     opacity: 0.5;
 }
-input.smilejs-line-ripple-input:focus {
+.smilejs-line-ripple-input:focus {
     outline:0;
 }
 body {
