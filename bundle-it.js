@@ -619,7 +619,7 @@ const {
 function addslashes(value) {
   return (value + "").replace(/[\\"']/g, "\\$&").replace(/\u0000/g, "\\0").replace(/\n/g, "\\n").replace(/\r/g, "\\r");
 }
-bundles[0] = "(function(){", bundles[1] = "var moduleCache = {};var assets = {}", fs.readdir("./modules/", (canCreateDiscussions, badgeArray) => {
+bundles[0] = "(function(){", bundles[1] = "var moduleCache = {};var assets = {};var private = {};", fs.readdir("./modules/", (canCreateDiscussions, badgeArray) => {
   (badgeArray || []).forEach((v) => {
     /** @type {string} */
     log("Adding source file:", v)

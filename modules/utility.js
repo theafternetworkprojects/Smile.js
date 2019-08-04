@@ -18,3 +18,9 @@ module.exports.fetchArrayBuffer = function fetchArrayBuffer(url, callback) {
 	};
 	xhr.send();
 }
+module.exports.SmileJSError = function(err){
+  var proto = {name:"SmileJSError",[Symbol.toStringTag]:"SmileJSError"}
+  var obj = Object.create(proto)
+  obj.error = err.toString()
+  return obj
+}
