@@ -56,6 +56,7 @@ try {
 	} catch(e){
 
 	}
+	smilejs.isDevtoolsOpen = loadModule("devtools.js")
 	smilejs.compress = loadModule("compress.js")
 	smilejs.loadCompressedLibrary = loadModule("load-compressed-lib.js")
 	smilejs.ui.notify = function notify(location = "top-left", type = "plain", dialogContent, black = true) {
@@ -186,10 +187,11 @@ try {
 	        "modal": document.getElementById(id + "-modal")
 	      }
 	    }
+			smilejs.fingerprintBrowser = loadModule("fingerprint.js")
 	smilejs.meta.loadTime = new Date() - startDate
 
 } catch (e) {
-	console.error("Component error Smile.js", e)
+	console.error(new (loadModule("utility.js").SmileJSError)(e,""))
 }
 if (this.window){
 	smilejs.globalErrors = []
