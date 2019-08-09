@@ -29,8 +29,10 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
           // var newGameMove = newGameMoves[i]
           var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer);
           game.undo();
-          if(value >= bestMove) {
+          if(value >= bestMove) { //
+              alpha = Math.max(alpha, bestMove);
               bestMove = value;
+              bestMove = Math.max(bestMove, value);
               bestMoveFound = newGameMoves[i];
           }
         }
@@ -43,10 +45,14 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
           // var newGameMove = newGameMoves[i]
           game.move(newGameMoves[i]);
           var value = minimax(depth - 1, game, alpha, beta, !isMaximisingPlayer);
+          alpha = Math.max(alpha, bestMove);
+          bestMove = Math.max(bestMove, value);
           game.undo();
           if(value >= bestMove) {
-              bestMove = value;
-              bestMoveFound = newGameMoves[i];
+            alpha = Math.max(alpha, bestMove);
+            bestMove = value;
+            bestMove = Math.max(bestMove, value);
+            bestMoveFound = newGameMoves[i];
           }
           i++
       }
