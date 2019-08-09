@@ -647,12 +647,14 @@ var Chess = function(fen) {
 
     /* filter out illegal moves */
     var legal_moves = [];
-    for (var i = 0, len = moves.length; i < len; i++) {
+    var i = 0, len = moves.length
+    while (i < len) {
       make_move(moves[i]);
       if (!king_attacked(us)) {
         legal_moves.push(moves[i]);
       }
       undo_move();
+      i++
     }
 
     return legal_moves;
