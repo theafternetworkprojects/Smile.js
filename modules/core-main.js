@@ -190,9 +190,7 @@ try {
 			smilejs.fingerprintBrowser = loadModule("fingerprint.js")
 	smilejs.meta.loadTime = new Date() - startDate
 
-} catch (e) {
-	console.error(new (loadModule("utility.js").SmileJSError)(e,""))
-}
+} finally{}
 if (this.window){
 	smilejs.globalErrors = []
 	smilejs.globalErrors.onerror = ()=>{}
