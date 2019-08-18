@@ -29,6 +29,32 @@ module.exports.SmileJSError = function (err, stack = "") {
     obj.stack = stack ? "SmileJSError: " + err + "\n" + stack : "SmileJSError: " + err
     return obj
 }
+module.exports.buf2hex = function buf2hex(buffer) {
+  return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+}
+module.exports.randomHex = function randomHex(length){
+  if (this.require){
+    var crypto1 = require("crypto");
+    if (length % 2 !== 0) throw "Should be a multiple of 2."
+    var id = crypto1.randomBytes(length / 2).toString('hex');
+    return id
+  } else {
+    if (length % 2 !== 0) throw "Should be a multiple of 2."
+    function getRandomId(length) {
+        if (!length) {
+            return '';
+        }
+        if (self.crypto){
+          var arr = new Uint8Array(length / 2);
+          crypto.getRandomValues(arr)
+          return loadModule("utility.js").buf2hex(arr.buffer)
+        } else {
+          return smilejs.randomId(length,"abcdef0987654321")
+        }
+    }
+    return getRandomId(length)
+  }
+}
 if (this.window) {
     if (window.devtoolsFormatters) {
         devtoolsFormatters.push({

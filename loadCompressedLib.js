@@ -487,13 +487,7 @@
   })();
 
   function fetchArrayBuffer(url, callback) {
-  	var xhr = new XMLHttpRequest();
-  	xhr.open('get', url);
-  	xhr.responseType = 'arraybuffer';
-  	xhr.onload = function() {
-  		callback(xhr.response);
-  	};
-  	xhr.send();
+    fetch(url).then(e=>e.arrayBuffer()).then(callback)
   }
   ((url)=>{
   	fetchArrayBuffer(url,(e)=>{
