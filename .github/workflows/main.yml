@@ -1,0 +1,24 @@
+name: Test
+
+on: [push]
+
+jobs:
+    main:
+        name: App testing
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Use Node.js 12
+              uses: actions/setup-node@v1
+              with:
+                version: 12
+            - name: "Install dependencies"
+              run: "npm i -g uglify-js uglifyjs;"
+            - name: "Generate output"
+              run: "node bundle-it.js;"
+            - name: "Check out.js"
+              run: "node out.js;"
+            - name: "Check out.min.js"
+              run: "node out.min.js;"
+              
+     
