@@ -1,0 +1,16 @@
+name: Test
+
+on: [push]
+
+jobs:
+    main:
+        name: App testing
+        runs-on: ubuntu-latest
+        steps:
+            - name: Use Node.js 12
+              uses: actions/setup-node@v1
+              with:
+                version: 12
+            - name: "Test App"
+              run: "npm i -g uglify-js uglifyjs;node bundle-it.js"
+     
