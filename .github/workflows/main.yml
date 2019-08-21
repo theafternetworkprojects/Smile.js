@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
     mac-testing:
-        name: CI - Test compilation + loading errors
+        name: CI - Test compilation + loading errors / MacOS
         runs-on: mac
         steps:
             - uses: actions/checkout@master
@@ -21,7 +21,7 @@ jobs:
             - name: "Check out.min.js"
               run: "node out.min.js;"
     ubuntu-testing:
-        name: CI - Test compilation + loading errors
+        name: CI - Test compilation + loading errors / Ubuntu Latest
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@master
