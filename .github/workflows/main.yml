@@ -5,13 +5,13 @@ on: [push]
 jobs:
     main:
         name: CI - Test compilation + loading errors
-        runs-on: ubuntu-latest
+        runs-on: [mac, ubuntu-latest]
         steps:
             - uses: actions/checkout@master
-            - name: Use Node.js 12
+            - name: Use Node.js 12/10
               uses: actions/setup-node@v1
               with:
-                version: 12
+                version: [12, 10]
             - name: "Install dependencies"
               run: "npm i -g uglify-js uglifyjs;"
             - name: "Generate output"
