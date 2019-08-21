@@ -8,10 +8,10 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@master
-            - name: Use Node.js 12
+            - name: Use Node.js 10
               uses: actions/setup-node@v1
               with:
-                version: 12
+                version: 10
             - name: "Install dependencies"
               run: "npm i -g uglify-js uglifyjs;"
             - name: "Generate output"
