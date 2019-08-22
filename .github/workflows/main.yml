@@ -3,8 +3,59 @@ name: CI
 on: [push]
 
 jobs:
-    main:
-        name: CI - Test compilation + loading errors
+    mac-testing-node10:
+        name: CI - Test compilation + loading errors / MacOS / Node 10
+        runs-on: macOS-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Use Node.js 10
+              uses: actions/setup-node@v1
+              with:
+                version: 10
+            - name: "Install dependencies"
+              run: "npm i -g uglify-js uglifyjs;"
+            - name: "Generate output"
+              run: "node bundle-it.js;"
+            - name: "Check out.js"
+              run: "node out.js;"
+            - name: "Check out.min.js"
+              run: "node out.min.js;"
+    ubuntu-testing-node10:
+        name: CI - Test compilation + loading errors / Ubuntu Latest / Node 10
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Use Node.js 10
+              uses: actions/setup-node@v1
+              with:
+                version: 10
+            - name: "Install dependencies"
+              run: "npm i -g uglify-js uglifyjs;"
+            - name: "Generate output"
+              run: "node bundle-it.js;"
+            - name: "Check out.js"
+              run: "node out.js;"
+            - name: "Check out.min.js"
+              run: "node out.min.js;"
+    mac-testing-node12:
+        name: CI - Test compilation + loading errors / MacOS / Node 12
+        runs-on: macOS-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Use Node.js 12
+              uses: actions/setup-node@v1
+              with:
+                version: 12
+            - name: "Install dependencies"
+              run: "npm i -g uglify-js uglifyjs;"
+            - name: "Generate output"
+              run: "node bundle-it.js;"
+            - name: "Check out.js"
+              run: "node out.js;"
+            - name: "Check out.min.js"
+              run: "node out.min.js;"
+    ubuntu-testing-node12:
+        name: CI - Test compilation + loading errors / Ubuntu Latest / Node 12
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@master
@@ -20,5 +71,39 @@ jobs:
               run: "node out.js;"
             - name: "Check out.min.js"
               run: "node out.min.js;"
+    mac-testing-node11:
+        name: CI - Test compilation + loading errors / MacOS / Node 11
+        runs-on: macOS-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Use Node.js 11
+              uses: actions/setup-node@v1
+              with:
+                version: 11
+            - name: "Install dependencies"
+              run: "npm i -g uglify-js uglifyjs;"
+            - name: "Generate output"
+              run: "node bundle-it.js;"
+            - name: "Check out.js"
+              run: "node out.js;"
+            - name: "Check out.min.js"
+              run: "node out.min.js;"
+    ubuntu-testing-node11:
+        name: CI - Test compilation + loading errors / Ubuntu Latest / Node 11
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Use Node.js 11
+              uses: actions/setup-node@v1
+              with:
+                version: 11
+            - name: "Install dependencies"
+              run: "npm i -g uglify-js uglifyjs;"
+            - name: "Generate output"
+              run: "node bundle-it.js;"
+            - name: "Check out.js"
+              run: "node out.js;"
+            - name: "Check out.min.js"
+              run: "node out.min.js;"
               
-     
+
